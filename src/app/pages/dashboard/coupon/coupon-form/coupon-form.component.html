@@ -1,0 +1,86 @@
+<mat-card class="box header rounded" style="padding: 20px 20px 0;">
+  <form [formGroup]="couponForm" (ngSubmit)="submitCoupon()" novalidate>
+    <input type="hidden" formControlName="id" />
+    <div style="display: flex;">
+      <div style="width: 76%">
+        <div style="display: grid;margin-top: 25px; ">
+          <div style="display: flex;justify-content: center;">
+            <mat-form-field appearance="outline" class="w-100 p-10" color="primary" >
+              <mat-label>Nombre:</mat-label>
+              <input matInput formControlName="name" placeholder="Nombre" maxlength="50">
+              <mat-error *ngIf="couponForm.get('name')?.invalid && couponForm.get('name')?.touched">El nombre es requerido.</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100 p-10" color="primary">
+              <mat-label>Categoría:</mat-label>
+              <input matInput formControlName="category" placeholder="Categoría" maxlength="150">
+              <mat-error *ngIf="couponForm.get('category')?.invalid && couponForm.get('category')?.touched">La categoría es requerido.</mat-error>
+            </mat-form-field>
+          </div>
+          <div style="display: flex;justify-content: center;">
+
+            <mat-form-field appearance="outline" class="w-100 p-10" color="primary">
+              <mat-label>Eco Coins Requeridos:</mat-label>
+              <input type="number" matInput formControlName="ecoCoinsRequired" placeholder="Eco Coins Requeridos" min="1">
+              <mat-error *ngIf="couponForm.get('ecoCoinsRequired')?.hasError('required') && couponForm.get('ecoCoinsRequired')?.touched">
+                Las monedas son requeridas.
+              </mat-error>
+              <mat-error *ngIf="couponForm.get('ecoCoinsRequired')?.hasError('lessThanZero') && couponForm.get('ecoCoinsRequired')?.touched">
+                El valor debe ser mayor que cero.
+              </mat-error>
+              
+            </mat-form-field>
+          </div>
+          <div style="display: flex;justify-content: center;">
+            <mat-form-field appearance="outline" class="w-100 p-10" color="primary">
+              <mat-label>Fecha de inicio:</mat-label>
+              <input type="date" matInput formControlName="startValidityDate" maxlength="150">
+              <mat-error *ngIf="couponForm.get('startValidityDate')?.invalid && couponForm.get('startValidityDate')?.touched">Se debe de ingresar una fecha</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100 p-10" color="primary">
+              <mat-label>Fecha de caducidad:</mat-label>
+              <input type="date" matInput formControlName="endValidityDate" maxlength="150">
+              <mat-error *ngIf="couponForm.get('endValidityDate')?.invalid && couponForm.get('endValidityDate')?.touched">Se debe de ingresar una fecha</mat-error>
+            </mat-form-field>
+          </div>
+          <mat-form-field appearance="outline" class="w-100 p-10" color="primary">
+            <mat-label>Descripción:</mat-label>
+            <textarea matInput #couponDescription formControlName="description" placeholder="Descripción"></textarea>
+            <mat-error *ngIf="couponForm.get('description')?.errors && couponForm.get('description')?.hasError('required') && couponForm.get('description')?.touched">
+              La descripción es requerida
+            </mat-error>
+            <mat-error *ngIf="couponForm.get('description')?.errors && couponForm.get('description')?.hasError('minlength') && couponForm.get('description')?.touched">
+              La descripción debe tener al menos 15 caracteres
+            </mat-error>
+            <mat-hint>{{couponDescription.value.length}} / 150</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div style="width: 20%;">
+        <div style="display: grid;margin-top: 25px;">
+          <div class="custom-dropzone d-flex" ngx-dropzone [accept]="'image/*'" (change)="onSelect($event)">
+            <ngx-dropzone-label>
+              <div>
+                <h2>Cargar Imagen</h2>
+              </div>
+            </ngx-dropzone-label>
+            <ngx-dropzone-image-preview class="custom-dropzone-image-preview" ngProjectAs="ngx-dropzone-preview" *ngIf="file.name" [file]="file" [removable]="true" (removed)="onRemove()">
+            </ngx-dropzone-image-preview>
+            <span *ngIf="errImg" style="font-size: 14px;">
+              <span class="mat-mdc-form-field-error mat-mdc-form-field-bottom-align ng-star-inserted" aria-live="polite">Por favor, cargar una imagen</span>
+            </span> 
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <div style="display: flex;justify-content: center;align-items: center;">
+      <mat-card-actions>
+        <div class="container-actions">
+          <button mat-raised-button color="primary" (click)="onBack()" style="margin-right: 8px;">Regresar</button>
+          <button mat-raised-button color="accent" (click)="onReset()" style="margin-right: 8px;">Resetear</button>
+          <button mat-raised-button style="background-color: #3ec256; color: white;" type="submit">Guardar</button>
+        </div>
+      </mat-card-actions>
+    </div>
+  </form>
+</mat-card>

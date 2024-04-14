@@ -1,0 +1,169 @@
+<mat-card class="full-width" style="min-height: 83vh !important;">
+
+  <div *ngIf="!isClient; else noPermissionMessage" class="container-box">
+    <mat-card class="box header rounded" *ngIf="userLogin">
+      <div *ngIf="center; else noCenterData" style="padding: 0 2rem;">
+        <mat-card-title>
+          <h1>
+            {{center?.name}}
+          </h1>
+        </mat-card-title>
+        <mat-card-subtitle>
+          <h3 class="">
+            Administrador: {{center?.User?.name}}
+          </h3>
+        </mat-card-subtitle>
+        <mat-card-subtitle>
+          <h3>
+            Fecha: {{fecha | date: 'dd/MM/yyyy'}}
+          </h3>
+        </mat-card-subtitle>
+      </div>
+
+      <ng-template #noCenterData>
+        <mat-card class="users">
+          <button mat-menu-item [matMenuTriggerFor]="userMenu" class="btn-users">
+            <mat-icon class="d-flex align-items-center">
+              <i-tabler name="users" class="icon-18 d-flex"></i-tabler>
+            </mat-icon>
+            <h3>
+              Centros
+            </h3>
+          </button>
+          <mat-menu #userMenu="matMenu">
+            <ng-container *ngFor="let user of centerAdmin">
+              <button mat-menu-item (click)="setSelectedCenter(user)">
+                {{ user.name }}
+                <span class="user-id" *ngIf="user.id">({{ user.id }})</span>
+              </button>
+            </ng-container>
+          </mat-menu>
+        </mat-card>
+      </ng-template>
+
+      <mat-card class="users">
+        <div>
+
+
+          <button mat-menu-item [matMenuTriggerFor]="userMenu" class="btn-users">
+            <mat-icon class="d-flex align-items-center">
+              <i-tabler name="users" class="icon-18 d-flex"></i-tabler>
+            </mat-icon>
+            <h3>
+              Usuarios
+            </h3>
+          </button>
+          <mat-menu #userMenu="matMenu">
+            <ng-container *ngFor="let user of customers">
+              <button mat-menu-item (click)="setSelectedCustomer(user)">
+                {{ user.name }}
+                <span class="user-id" *ngIf="user.id">({{ user.id }})</span>
+              </button>
+            </ng-container>
+          </mat-menu>
+
+          <div *ngIf="selectedCustomer" style="margin-top: 2rem;">
+            <h2>Cliente: {{selectedCustomer.name}}</h2>
+            <h3><b></b> </h3>
+            <p style="color: #979797 !important; font-weight: 600;">{{selectedCustomer.email}}</p>
+            <p style="color: #979797 !important; font-weight: 600;">Identificación: {{selectedCustomer.identification}}
+            </p>
+          </div>
+
+        </div>
+      </mat-card>
+
+      <!--  -->
+      <div style="padding: 0 2rem 2rem 2rem  !important; border-radius: 5px;">
+
+        <mat-card class="box box-detail ">
+          <section class="materialsCheck">
+            <div *ngFor="let material of materials">
+              <mat-checkbox style="color: white;" class="custom-checkbox materialCheck" [(ngModel)]="material.checked"
+                (change)="onCheckboxChange(material.checked ,material.materialID)">
+                <b style="color: white;">{{material.Recyclable_Material.name }}
+                </b>
+              </mat-checkbox>
+            </div>
+          </section>
+
+          <mat-card-content *ngIf="dataSource">
+            <mat-table [dataSource]="dataSource" class="custom-table">
+              <ng-container matColumnDef="material">
+                <mat-header-cell *matHeaderCellDef> Material </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.materialDetails.name}}
+                </mat-cell>
+                <mat-cell *matCellDef="let element">
+                  <!-- Usa [(ngModel)] para enlazar el estado del checkbox al campo checked del elemento -->
+                  <mat-checkbox [(ngModel)]="element.checked"></mat-checkbox>
+                  {{element.materialDetails.name}}
+                </mat-cell>
+
+                <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="precio">
+                <mat-header-cell *matHeaderCellDef> Precio </mat-header-cell>
+                <mat-cell *matCellDef="let element"> 🪙{{element.price}} </mat-cell>
+                <mat-footer-cell *matFooterCellDef>
+                  <span *ngIf="errorAmount" style="
+                  font-size: 14px;
+              ">
+                    <span class="mat-mdc-form-field-error mat-mdc-form-field-bottom-align ng-star-inserted" aria-live="polite">Por favor, ingrese solo valores números</span>
+                  </span> 
+                </mat-footer-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="cantidad">
+                <mat-header-cell *matHeaderCellDef> Cantidad </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                  <mat-form-field appearance="fill">
+                    <input matInput id="amount " type="number" class="form-control mb-2" [(ngModel)]="element.amount" (change)="onInputChange($event, element)">
+                  </mat-form-field>
+                </mat-cell>
+                
+
+                <mat-footer-cell *matFooterCellDef class="footer-total">Total </mat-footer-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="subtotal">
+                <mat-header-cell *matHeaderCellDef> Subtotal </mat-header-cell>
+                <mat-cell *matCellDef="let element"> 🪙 {{ element.subtotal}} </mat-cell>
+                <mat-footer-cell *matFooterCellDef class="footer-total">🪙 {{ total }} </mat-footer-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="acciones">
+                <mat-header-cell *matHeaderCellDef> Acciones</mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                  <button mat-icon-button (click)="onDeleteMaterial(element)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </mat-cell>
+                <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns" class="header"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+              <mat-footer-row *matFooterRowDef="displayedColumns" class="footer-row"></mat-footer-row>
+            </mat-table>
+
+          </mat-card-content>
+          <mat-card-actions class="btn-actions">
+            <button mat-flat-button (click)="performRedeem()" style="  background-color: #0088cc; color: white">
+              <mat-icon>check_circle_outline</mat-icon> Canjear
+            </button>
+          </mat-card-actions>
+
+
+          <!-- Table -->
+        </mat-card>
+      </div>
+    </mat-card>
+
+
+
+  </div>
+  <ng-template #noPermissionMessage>
+    <h2 style="text-align: center;font-size: 1.5em;margin: auto;">No cuentas con los permisos necesarios</h2>
+  </ng-template>
+</mat-card>

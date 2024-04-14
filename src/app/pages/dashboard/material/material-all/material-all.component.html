@@ -1,0 +1,50 @@
+<mat-card class="full-width" style="min-height: 83vh !important;">
+  <div class="container-box">
+    <mat-card class="box header rounded">
+      <mat-card class="custom-card">
+        <mat-card-content>
+          <mat-card-title>
+            <div class="centered-content">
+              <h1 style="padding: 0 2rem 0rem 0;">Materiales</h1>
+              <a mat-fab matTooltip="Crear un centro" aria-label="Crear Centro" color="primary" class="custom-fab"
+                style="width: 35px; height: 35px;" (click)="createMaterial()">
+                <mat-icon>add</mat-icon>
+              </a>
+            </div>
+          </mat-card-title>
+        </mat-card-content>
+      </mat-card>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;margin-top: 20px;">
+        <ng-container *ngFor="let row of dataSource.data">
+          <div class="material-card-container">
+            <mat-card class="material-card">
+              <mat-card-header>
+                <mat-card-title>{{ row.name }} </mat-card-title>
+              </mat-card-header>
+              <img mat-card-image [src]="'data:image/png;base64,' + row.imageBase64" alt="Material Image" style="width: 200px;
+              margin: auto;
+              padding-top: 20px;">
+              <mat-card-content>
+                <p><b>Precio:</b> {{ row.price }} 🪙</p>
+                <p><b>Descripción:</b> <br/> {{ row.description }}</p>
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-mini-fab color="accent" matTooltip="Detalles del material" aria-label="Detalles del material"
+                  color="primary" (click)="materialDetail(row.materialID)" style="margin-right: 5px;">
+                  <mat-icon class="mat-18">info</mat-icon>
+                </button>
+                <button mat-mini-fab color="accent" matTooltip="Editar" aria-label="Editar" color="primary"
+                  (click)="updateMaterial(row.materialID)">
+                  <mat-icon class="mat-18">edit</mat-icon>
+                </button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+          <div *ngIf="dataSource.data.length === 0" class="no-materials-message">
+            <p>No hay materiales de reciclaje registrados.</p>
+          </div>
+        </ng-container>
+      </div>
+    </mat-card>
+  </div>
+</mat-card>

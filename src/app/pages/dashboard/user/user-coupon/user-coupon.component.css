@@ -1,0 +1,10 @@
+.full-width-table {
+  width: 100%;
+}
+
+.custom-card {
+  background-color: transparent;
+  box-shadow: none;
+  height: 100px !important;
+  margin: 0;
+}

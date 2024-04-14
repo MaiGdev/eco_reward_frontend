@@ -1,0 +1,158 @@
+<form [formGroup]="centerForm" (ngSubmit)="submitCenter()" novalidate>
+  <input type="hidden" formControlName="id" />
+  <mat-card style="min-height: 83vh !important; display: flex; justify-content: center;">
+    <div class="text-center m-t-20 " style="padding-bottom: 1rem; padding-bottom: 1rem; font-size: 1.2rem;">
+      <h1 style="color: #707a82;">{{titleForm}}</h1>
+    </div>
+
+
+    <div class="form-container">
+      <div style="width: 100%;">
+
+        <div style="display: flex; justify-content: center; align-items: center; gap: 1%;">
+          <!-- NAME -->
+          <mat-form-field appearance="outline" color="primary" style="width: 38%;">
+            <input matInput #centerName formControlName="name" maxlength="40" placeholder="Name">
+            <mat-hint align="end">{{centerName.value.length}} / 40</mat-hint>
+            <mat-error *ngIf="errorHandling('name','required')">
+              Name is <b>required</b>
+            </mat-error>
+            <mat-error *ngIf="errorHandling('name','minlength')">
+              5 characters <b>minimum</b>
+            </mat-error>
+            <mat-error *ngIf="errorHandling('name','maxlength')">
+              40 characters <b>maximun</b>
+            </mat-error>
+          </mat-form-field>
+
+
+          <!-- phone -->
+          <mat-form-field appearance="outline" color="primary" style="width: 38%;">
+            <input matInput formControlName="phone" placeholder="Phone">
+            <mat-error *ngIf="errorHandling('phone','required')">
+              Phone is <b>required</b>
+            </mat-error>
+            <mat-error *ngIf="errorHandling('phone','pattern')">
+              Invalid format! <b>0000-0000 </b>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div style="display: flex; justify-content: center; align-items: center; gap: 1%;">
+          <!-- province -->
+          <mat-form-field appearance="outline" color="primary" style="width: 25%;">
+            <input matInput formControlName="province" placeholder="Province">
+            <mat-error *ngIf="errorHandling('province','required')">
+              Province is <b>required</b>
+            </mat-error>
+            <mat-error *ngIf="errorHandling('province','minlength')">
+              5 characters <b>minimum</b>
+            </mat-error>
+            <mat-error *ngIf="errorHandling('province','maxlength')">
+              30 characters <b>maximun</b>
+            </mat-error>
+          </mat-form-field>
+
+          <!-- Canton -->
+          <mat-form-field appearance="outline" color="primary" style="width: 25%;">
+            <input matInput formControlName="canton" placeholder="Canton">
+            <mat-error *ngIf="errorHandling('canton','required')">
+              Canton is <b>required</b>
+            </mat-error>
+            <mat-error *ngIf="errorHandling('canton','minlength')">
+              5 characters <b>minimum</b>
+            </mat-error>
+            <mat-error *ngIf="errorHandling('canton','maxlength')">
+              30 characters <b>maximun</b>
+            </mat-error>
+          </mat-form-field>
+
+          <!-- district -->
+          <mat-form-field appearance="outline" color="primary" style="width: 25%;">
+            <input matInput formControlName="district" placeholder="District">
+            <mat-error *ngIf="errorHandling('district','required')">
+              District is <b>required</b>
+            </mat-error>
+            <mat-error *ngIf="errorHandling('district','minlength')">
+              5 characters <b>minimum</b>
+            </mat-error>
+            <mat-error *ngIf="errorHandling('district','maxlength')">
+              30 characters <b>maximun</b>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div style="display: flex; justify-content: center; align-items: center; ">
+          <!-- exact_address -->
+          <mat-form-field appearance="outline" color="primary" style="width: 77.3%;">
+            <input matInput formControlName="exact_address" placeholder="Exact address">
+            <mat-error *ngIf="errorHandling('exact_address','required')">
+              Exact address is <b>required</b>
+            </mat-error>
+            <mat-error *ngIf="errorHandling('exact_address','minlength')">
+              5 characters <b>minimum</b>
+            </mat-error>
+            <mat-error *ngIf="errorHandling('exact_address','maxlength')">
+              150 characters <b>maximun</b>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div style="display: flex; justify-content: center; align-items: center; ">
+          <!-- operating_hours -->
+          <mat-form-field appearance="outline" color="primary" style="width: 77.3%;;">
+            <input matInput formControlName="operating_hours" placeholder="Operating hours">
+            <mat-error *ngIf="errorHandling('operating_hours','required')">
+              Operating hours are <b>required</b>
+            </mat-error>
+            <mat-error *ngIf="errorHandling('operating_hours','minlength')">
+              5 characters <b>minimum</b>
+            </mat-error>
+            <mat-error *ngIf="errorHandling('operating_hours','maxlength')">
+              150 characters <b>maximun</b>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div style="display: flex; justify-content: center; align-items: center; ">
+          <!-- administradores -->
+          <mat-form-field appearance="outline" color="primary" style="width: 77.3%;;">
+            <mat-select placeholder="Administrator" formControlName="administrator_userID">
+              <mat-option *ngFor="let item of administratorList" [value]="item.userID">
+                {{item.name}}
+              </mat-option>
+            </mat-select>
+
+          </mat-form-field>
+        </div>
+
+        <div style="display: flex; justify-content: center; align-items: center; ">
+          <!-- accepted_materials -->
+          <mat-form-field appearance="outline" color="primary" style="width: 77.3%;;">
+            <mat-select placeholder="Accepted material" formControlName="Center_Material" multiple>
+              <mat-option *ngFor="let item of center_MaterialMaterialList" [value]="item.materialID">
+                {{item.name}}
+              </mat-option>
+            </mat-select>
+
+          </mat-form-field>
+        </div>
+
+
+      </div>
+    </div>
+
+
+
+
+    <div style="display: flex; justify-content: center; align-items: center; ">
+      <mat-card-actions>
+        <div class="container-actions">
+          <button mat-raised-button color="primary" (click)="onBack()" style="margin-right: 8px;">Return</button>
+          <button mat-raised-button color="accent" (click)="onReset()" style="margin-right: 8px;">Reset</button>
+          <button mat-raised-button style="background-color: #3ec256; color: white;" type="submit">Save</button>
+        </div>
+      </mat-card-actions>
+    </div>
+  </mat-card>
+</form>

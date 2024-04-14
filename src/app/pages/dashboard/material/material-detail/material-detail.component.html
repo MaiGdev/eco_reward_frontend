@@ -1,0 +1,48 @@
+<mat-card class="box header rounded" style="padding: 20px 20px 0;">
+    <div style="display: flex;">
+      <div style="width: 76%">
+        <div style="display: grid;margin-top: 25px; ">
+          <div style="display: flex;justify-content: center;">
+            <mat-form-field appearance="outline" class="w-100 p-10" color="primary">
+              <mat-label style="color: #111c2d">Nombre:</mat-label>
+              <input matInput style="color: #111c2d" placeholder="Nombre" [value]="materialDetails?.name" disabled>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100 p-10" color="primary">
+              <mat-label style="color: #111c2d">Color:</mat-label>
+              <input matInput style="color: #111c2d" placeholder="Color" [value]="materialDetails?.color_representation" type="color" disabled>
+            </mat-form-field>
+          </div>
+          <div style="display: flex;justify-content: center;">
+            <mat-form-field appearance="outline" class="w-100 p-10" color="primary">
+              <mat-label style="color: #111c2d">Precio:</mat-label>
+              <input matInput style="color: #111c2d" placeholder="Precio" [value]="materialDetails?.price" disabled>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100 p-10" color="primary">
+              <mat-label style="color: #111c2d">Unidad de medida:</mat-label>
+              <input matInput style="color: #111c2d" placeholder="Unidad de medida" [value]="materialDetails?.unit_of_measure" disabled>
+            </mat-form-field>
+          </div>
+          <div style="display: flex;justify-content: center;">
+            <mat-form-field appearance="outline" class="w-100 p-10" color="primary">
+              <mat-label style="color: #111c2d">Descripción:</mat-label>
+              <textarea matInput style="color: #111c2d" placeholder="Descripción" [value]="materialDetails?.description" disabled></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div style="width: 20%;">
+        <div style="display: grid;margin-top: 25px;">
+          <ngx-dropzone-image-preview class="custom-dropzone-image-preview" ngProjectAs="ngx-dropzone-preview"
+            *ngIf="materialDetails?.image" [file]="file" [removable]="false">
+          </ngx-dropzone-image-preview>
+        </div>
+      </div>
+    </div>
+    <div style="display: flex;justify-content: center;align-items: center;">
+      <mat-card-actions>
+        <div class="container-actions">
+          <button mat-raised-button color="primary" (click)="onBack()" style="margin-right: 8px;">Regresar</button>
+        </div>
+      </mat-card-actions>
+    </div>
+</mat-card>

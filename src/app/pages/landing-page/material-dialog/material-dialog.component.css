@@ -1,0 +1,28 @@
+/* .dashboard-card {
+  margin: 2%;
+}
+
+.dashboard-card-content {
+  text-align: left;
+  line-height: 1.5em;
+}
+.info {
+  margin: 1em 1em;
+}
+ */
+
+.dialog-card {
+  border-radius: 0;
+  box-shadow: none;
+  min-width: 400px;
+  height: 100% !important;
+}
+
+.mat-mdc-card-header {
+  padding-top: 0.2rem;
+}
+
+.colorRepresentation {
+  width: 50%;
+  border-radius: 2px;
+}

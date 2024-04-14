@@ -1,0 +1,25 @@
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 330px;
+}
+
+.centered {
+  text-align: center;
+}
+
+.spacer {
+  margin: 0 100px; /* Ajusta el valor del margen según tu preferencia */
+}
+
+.right {
+  text-align: right;
+}
+
+/* .options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+ */

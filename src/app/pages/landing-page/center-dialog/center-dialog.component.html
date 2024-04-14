@@ -1,0 +1,47 @@
+<div style="width: 100%; display: flex; justify-content: end;">
+  <button class="close-button" [mat-dialog-close]="true"
+    style="border: 0; background-color: white; margin: .5rem .7rem 0 0;">
+    <mat-icon class="close-icon" color="primary">close</mat-icon>
+  </button>
+</div>
+
+<mat-card class="dialog-card">
+  <mat-card-header>
+    <mat-card-title-group>
+      <mat-card-title>{{ datos.name }}</mat-card-title>
+      <mat-card-subtitle>{{ datos.User?.name }}</mat-card-subtitle>
+    </mat-card-title-group>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="or-border m-t-30" style="padding-bottom: 1rem;">Detalle</div>
+
+    <span style="display: block;">
+      <b>Dirección: </b>
+      <span>{{ datos.Address?.province }}</span>,
+      <span>{{ datos.Address?.canton }}</span>,
+      <span>{{ datos.Address?.district }}</span>
+    </span>
+    <span style="display: block;">
+      <b>Direccion exacta: </b>
+      <span>{{ datos.Address?.exact_address }}</span>
+    </span>
+    <span style="display: block;">
+      <b>Teléfono: </b> {{ datos.phone }}
+    </span>
+    <span style="display: block;">
+      <b>Horas de funcionamiento: </b> {{ datos.operating_hours }}
+    </span>
+    <span style="display: block;">
+      <b>Materiales: </b>
+      <span *ngFor="let material of datos.Center_Material; let last = last">
+        {{ material.Recyclable_Material.name }}
+        <ng-container *ngIf="!last">,</ng-container>
+      </span>
+
+    </span>
+
+    <ul>
+
+    </ul>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,113 @@
+.footer-row {
+  font-weight: bold;
+}
+
+.container-box {
+  padding: 1rem;
+}
+
+.box {
+  padding: 2em 2em;
+  box-shadow: 0 2px 6px rgba(37, 83, 185, 0.1);
+}
+.header {
+  background-color: #fafafa;
+  color: #666666;
+}
+.box-detail {
+  background-color: #fafafa;
+  padding: 2rem 0;
+  color: #666666;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.mat-mdc-card-subtitle {
+  color: #979797 !important;
+}
+
+.mat-mdc-card-content {
+  padding: 0;
+}
+
+.users {
+  padding: 0 2rem 0 2rem;
+  color: rgb(82, 82, 82);
+  background-color: #fafafa;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  margin: 1rem 0 0 0;
+}
+
+.btn-users {
+  background-color: rgba(128, 128, 128, 0.295);
+  border-radius: 7px;
+}
+.btn-users:hover {
+  background-color: rgba(0, 113, 219, 0.185) !important;
+}
+
+.detailContent {
+  /*  padding: 2rem; */
+  background-color: rgba(128, 128, 128, 0.295);
+}
+
+.mdc-data-table__header-row {
+  background-color: black;
+  color: white;
+}
+
+/* styles.css (o tu archivo de estilos) */
+
+.materialsCheck {
+  background-color: #000 !important;
+  display: flex;
+  justify-content: start;
+  gap: 10%;
+  align-items: center;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+}
+
+.materialCheck {
+  width: 44px; /* Ajusta el tamaño del check según tus necesidades */
+  height: 44px;
+  color: white;
+}
+.mat-mdc-checkbox-1-input {
+  color: white !important;
+}
+
+.mdc-checkbox__background {
+  background-color: white !important;
+}
+.mdc-checkbox__native-control {
+  background-color: white !important;
+}
+
+.btn-actions {
+  display: flex;
+  justify-content: end;
+
+  padding: 2rem 0 0 0;
+}
+
+/* .footer-row {
+  background-color: #6d6d6d;
+}
+.footer-total {
+  font-size: 1.2em;
+  font-weight: bolder;
+} */
+
+.mat-header-row {
+  background-color: #f0f0f0; /* Cambia el color de fondo del encabezado */
+  color: #333; /* Cambia el color del texto del encabezado */
+}
+
+.custom-table .mat-header-row {
+  background-color: #f0f0f0; /* Cambia el color de fondo del encabezado */
+  color: #333; /* Cambia el color del texto del encabezado */
+}

@@ -1,0 +1,75 @@
+<div class="invoice" *ngIf="exchangeDetails" style="
+overflow: auto;
+">
+  <div class="invoice-container">
+
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <div>
+        <img src="../../../assets/images/EcoRewardsTransparent invoice.svg" class="invoice-img">
+      </div>
+      <div>
+        <h1 style="text-align: end;">Factura</h1>
+        <div style="display: flex; justify-content: space-between; justify-items: center; gap: 30px;">
+          <b>Factura</b>
+          <p> # {{exchangeDetails.exchangeID}}</p>
+        </div>
+        <div style="display: flex; justify-content: space-between; justify-items: center; gap: 30px;">
+          <b>Fecha</b>
+          <p> {{ exchangeDetails.exchange_date | date: 'dd/MM/yyyy' }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="invoice-details">
+      <mat-divider style="margin: 1rem 0 0.5rem 0;"></mat-divider>
+      <div class="client-info">
+        <h3 style="margin-bottom: 5px;">Cliente: </h3>
+        <p> {{ exchangeDetails.client.name }}</p>
+        <p>{{ exchangeDetails.client.email }}</p>
+        <p>Identificación: {{ exchangeDetails.client.identification }}</p>
+      </div>
+      <div class="material-details ">
+        <!--  <h3>Detalles del Intercambio:</h3> -->
+        <table mat-table [dataSource]="exchangeDetails.exchange_details">
+          <ng-container matColumnDef="material">
+            <th mat-header-cell *matHeaderCellDef style="font-weight: 600;"> Material </th>
+            <td mat-cell *matCellDef="let detail"> {{ detail.material_name }} </td>
+          </ng-container>
+          <ng-container matColumnDef="quantity">
+            <th mat-header-cell *matHeaderCellDef style="font-weight: 600;"> Cantidad </th>
+            <td mat-cell *matCellDef="let detail"> {{ detail.quantity }} </td>
+          </ng-container>
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef style="font-weight: 600;"> Precio por unidad</th>
+            <td mat-cell *matCellDef="let detail"> {{ detail.material_price }} 🪙</td>
+          </ng-container>
+          <ng-container matColumnDef="subtotal">
+            <th mat-header-cell *matHeaderCellDef style="font-weight: 600;"> Subtotal</th>
+            <td mat-cell *matCellDef="let detail"> {{ detail.subtotal }} 🪙</td>
+          </ng-container>
+          <ng-container matColumnDef="ecoCoins">
+            <th mat-header-cell *matHeaderCellDef style="font-weight: 600;"> ECO Coins </th>
+            <td mat-cell *matCellDef="let detail"> {{ detail.eco_coins }} 🪙</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="['material', 'quantity', 'price', 'subtotal', 'ecoCoins']"></tr>
+          <tr mat-row
+            *matRowDef="let row; columns: ['material', 'quantity', 'price', 'subtotal', 'ecoCoins']; let i = index"
+            [ngClass]="{'even-row': i % 2 === 0, 'odd-row': i % 2 !== 0}"></tr>
+        </table>
+      </div>
+      <div style="margin: 1rem 0 0.5rem 0; text-align: right;">
+        <h3>Total ECO Coins: {{ exchangeDetails.total_eco_coins }} 🪙</h3>
+      </div>
+
+      <div
+        style="display: flex;  justify-content: space-between;  align-items: center; flex-direction: row;  padding-top: 2rem;">
+        <div style="margin: 0;width: 100%;">
+          <h2>Centro de Acopio</h2>
+          <div style="display: inline-flex;width: inherit;">
+            <h4 style="margin: 0;margin-right: auto;">{{ exchangeDetails.recycling_center.name }}</h4><p style="margin-left: auto;">Teléfono: {{ exchangeDetails.recycling_center.phone }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

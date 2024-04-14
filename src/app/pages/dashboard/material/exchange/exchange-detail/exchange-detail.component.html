@@ -1,0 +1,81 @@
+<mat-card style="min-height: 83vh !important;">
+
+
+  <div class="container-box">
+    <mat-card class="box header rounded">
+
+      <div style="padding: 0 6rem;">
+        <mat-card-header style="padding-left: 0; padding-right: 0;">
+          <div>
+            <mat-card-title>
+              <h1 style="padding: 0 2rem 0rem 0;">Detalle del Canje de Materiales</h1>
+            </mat-card-title>
+          </div>
+          <div style="margin: 1rem 0 0 auto;">
+            <button mat-flat-button (click)="openInvoiceDialog()" style="  background-color: #0088cc; color: white">
+              <mat-icon>assignment</mat-icon>Factura
+            </button>
+          </div>
+        </mat-card-header>
+
+        <mat-card-content style="padding-left: 0; ">
+          <!-- Columna 1 -->
+          <div class="columnExchange">
+            <p style="font-size: 1.1rem;"><b>Número de Canje:</b> {{ exchangeData.exchangeID }}</p>
+            <p style="font-size: 1.1rem;"><b>Fecha:</b> {{ exchangeData.exchange_date | date:'short' }}</p>
+            <p style="font-size: 1.1rem;"><b>Cliente:</b> {{ exchangeData.client.name }}</p>
+          </div>
+
+          <!-- Columna 2 -->
+          <div class="columnExchange">
+            <p style="font-size: 1.1rem;"><b>Centro de Reciclaje:</b> {{ exchangeData.recycling_center.name }}</p>
+            <p style="font-size: 1.1rem;"><b>Total Eco Coins:</b> {{ exchangeData.total_eco_coins }} 🪙</p>
+          </div>
+        </mat-card-content>
+
+        <mat-divider></mat-divider>
+      </div>
+
+      <mat-card-content style="margin-top: 1rem; padding: 0 6rem;">
+        <div class="mat-elevation-z8">
+          <mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="material_name">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Material </mat-header-cell>
+              <mat-cell *matCellDef="let detail"> {{ detail.material_name }} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="quantity">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </mat-header-cell>
+              <mat-cell *matCellDef="let detail"> {{ detail.quantity }} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="material_price">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Precio del Material </mat-header-cell>
+              <mat-cell *matCellDef="let detail"> {{ detail.material_price }} 🪙</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="subtotal">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Subtotal </mat-header-cell>
+              <mat-cell *matCellDef="let detail"> {{ detail.subtotal }} 🪙</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="eco_coins">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Eco Coins </mat-header-cell>
+              <mat-cell *matCellDef="let detail"> {{ detail.eco_coins }} 🪙</mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+
+          <mat-paginator #paginator [length]="dataSource.data.length" [pageIndex]="0" [pageSize]="10"
+            [pageSizeOptions]="[5, 10, 25]" aria-label="Seleccione una página">
+          </mat-paginator>
+        </div>
+      </mat-card-content>
+
+    </mat-card>
+  </div>
+
+
+
+</mat-card>

@@ -1,0 +1,24 @@
+.home-footer {
+  color: white;
+  background-color: black;
+}
+
+.home-footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 330px;
+}
+
+.mat-divider-custom {
+  border-top: 2px solid yellow;
+  margin-top: 0.5rem;
+  width: 30% !important;
+}
+
+/* footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+ */

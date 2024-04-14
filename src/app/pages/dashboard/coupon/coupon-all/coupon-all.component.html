@@ -1,0 +1,68 @@
+<mat-card class="full-width " style="min-height: 83vh !important;">
+
+  <div class="container-box">
+    <mat-card class="box header rounded">
+      <!-- Titulo del Card -->
+      <mat-card class="custom-card">
+        <mat-card-content>
+          <mat-card-title>
+            <div class="centered-content">
+
+              <ng-container *ngIf="userLogin && userLogin.user && userLogin.user.role !== 3">
+                <h1 style="padding: 0 2rem 0rem 0;">Cupones</h1>
+              </ng-container>
+              <ng-container *ngIf="userLogin && userLogin.user && userLogin.user.role === 3">
+                <h1 style="padding: 0 2rem 0rem 0;">Cupones disponibles</h1>
+              </ng-container>
+
+
+              <ng-container *ngIf="userLogin && userLogin.user && userLogin.user.role !== 3">
+                <a mat-fab matTooltip="Crear un centro" aria-label="Crear Centro" color="primary" class="custom-fab"
+                  style="width: 35px; height: 35px;" (click)="createCoupon()">
+                  <mat-icon>add</mat-icon>
+                </a>
+              </ng-container>
+
+            </div>
+          </mat-card-title>
+        </mat-card-content>
+      </mat-card>
+
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
+        <ng-container *ngFor="let coupon of dataSource.data">
+          <mat-card class="box rounded" style="margin: 1rem; width: 300px;">
+            <mat-card-header>
+              <mat-card-title>{{ coupon.name }}</mat-card-title>
+            </mat-card-header>
+            <img mat-card-image [src]="'data:image/png;base64,' + coupon.imageBase64" alt="Coupon Image">
+            <mat-card-content>
+              <p>Categoría: {{ coupon.category }}</p>
+              <p>Desde: {{ formattedDate(coupon.start_validity_date) }}</p>
+              <p>Hasta: {{ formattedDate(coupon.end_validity_date) }}</p>
+            </mat-card-content>
+
+            <ng-container *ngIf="userLogin && userLogin.user && userLogin.user.role === 3">
+              <button mat-button color="primary" (click)="openDialogConfimCouponExchange()">
+                    Canjear
+                  </button>
+            </ng-container>
+            <ng-container *ngIf="userLogin && userLogin.user && userLogin.user.role === 1">
+              <mat-card-actions>
+                <button mat-button color="primary" (click)="couponDetail(coupon.couponID)">Detalle</button>
+                <button mat-button color="primary" (click)="updateCoupon(coupon.couponID)">Editar</button>
+              </mat-card-actions>
+            </ng-container>
+            <ng-container *ngIf="userLogin && userLogin.user && userLogin.user.role === 2">
+              <mat-card-actions>
+                <button mat-button color="primary" (click)="couponDetail(coupon.couponID)">Detalle</button>
+              </mat-card-actions>
+            </ng-container>
+          </mat-card>
+        </ng-container>
+      </div>
+      
+    </mat-card>
+  </div>
+
+</mat-card>

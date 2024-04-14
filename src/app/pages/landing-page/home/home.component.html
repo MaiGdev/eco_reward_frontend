@@ -1,0 +1,203 @@
+<!-- Intro -->
+
+<section id="intro-section" class="home-intro-section background-div">
+  <div fxlayout="row" fxlayout.lt-md="column" fxlayoutwrap="nowrap" fxlayoutgap="30px" class="hero-container">
+    <div style="margin-right: 30px; flex: 1 1 100%; box-sizing: border-box; max-width: 60%;">
+      <h1 class="home-intro-title">Bienvenido a EcoRecompensas</h1>
+      <div class="home-intro-desc"> En EcoRewards creemos en la importancia de cuidar nuestro planeta y recompensar
+        acciones ecológicas que hacen un
+        diferencia. Nuestra aplicación le ofrece la oportunidad de transformar sus simples actos de reciclaje en recompensas significativas.
+      </div>
+      <div fxlayout="column" fxlayoutgap="30px" class="intro-list"
+        style="flex-direction: column; box-sizing: border-box; display: flex;">
+
+        <div fxflex="100"
+          style="margin-bottom: 30px; flex: 1 1 100%; box-sizing: border-box; max-height: 100%; flex-direction: row; display: flex;">
+          <mat-icon role="img" style="color: white;" class="mat-icon notranslate mat-accent material-icons"
+            aria-hidden="true" data-mat-icon-type="font">check
+          </mat-icon>
+          <span fxflex="20px" style="flex: 1 1 20px; box-sizing: border-box; max-width: 20px; min-width: 20px;">
+          </span>
+          <span>
+            <b>Reciclar:</b>
+            Fomentamos el reciclaje de materiales como papel, vidrio, cartón y plástico.
+          </span>
+        </div>
+
+        <div fxflex="100"
+          style="margin-bottom: 30px; flex: 1 1 100%; box-sizing: border-box; max-height: 100%; flex-direction: row; display: flex;">
+          <mat-icon role="img" style="color: white;" class="mat-icon notranslate mat-accent material-icons"
+            aria-hidden="true" data-mat-icon-type="font">check
+          </mat-icon>
+          <span fxflex="20px" style="flex: 1 1 20px; box-sizing: border-box; max-width: 20px; min-width: 20px;">
+          </span>
+          <span>
+            <b>Ganar:</b>
+            Acumule monedas ecológicas y canjee productos orgánicos, cupones y más.
+          </span>
+        </div>
+
+        <div fxflex="100"
+          style="margin-bottom: 30px; flex: 1 1 100%; box-sizing: border-box; max-height: 100%; flex-direction: row; display: flex;">
+          <mat-icon role="img" style="color: white;" class="mat-icon notranslate mat-accent material-icons"
+            aria-hidden="true" data-mat-icon-type="font">check
+          </mat-icon>
+          <span fxflex="20px" style="flex: 1 1 20px; box-sizing: border-box; max-width: 20px; min-width: 20px;">
+          </span>
+          <span>
+
+            <b>Cuidarse:</b> Nuestra aplicación promueve la importancia de la ecología y la responsabilidad ambiental.
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="intro-product">
+      <img mat-card-image="" src="../../../../assets/images/EcoRewardsTransparent.svg" class="mat-card-image">
+    </div>
+  </div>
+</section>
+
+
+<!-- Materials -->
+
+<section class="portfolio home-material-section">
+  <div class="section-header">
+    <h2 style="font-size: 28px;">Materiales</h2>
+    <p style="font-size: 20px; margin-bottom: 2rem; line-height: 1.2;">Descubre los materiales que puedes reciclar y
+      contribuir a un futuro más sostenible. <br> ¡Empiece a reciclar y ganar monedas ecológicas hoy! </p>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6 col-lg-3" *ngFor="let material of materialData || []" [style.background-color]="material?.color_representation" style="padding: 10px;
+    border-radius: 10px;">
+      <mat-card class="cardWithShadow material overflow-hidden" style="margin: 0;">
+        <!--  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+
+        <img *ngIf="material?.image" [src]="'data:image/png;base64,' + material.imageBase64" alt="{{ material?.name }}">
+
+
+
+        <mat-card-content class="p-b-24 p-t-12 position-relative">
+          <mat-card-title>{{ material.name }}</mat-card-title>
+
+
+          <div class="d-flex align-items-center">
+            <button mat-mini-fab class="bg-light-warning text-success shadow-none icon-27">
+              <i-tabler class="icon-20" name="coins" style="color:#f8c076 ;"></i-tabler>
+            </button>
+            <div class="mat-body-1 f-w-600 m-l-12">{{ material.price }} </div>
+          </div>
+
+
+          <div class="d-flex align-items-center" style="padding-top: .1rem;">
+            <button mat-mini-fab class="bg-light-success text-success shadow-none icon-27">
+              <i-tabler class="icon-20" name="box-seam" class="icon-20"></i-tabler>
+            </button>
+            <div class="mat-body-1 f-w-600 m-l-12">{{ material.unit_of_measure }} </div>
+          </div>
+
+          <mat-card-actions class="container-actions">
+            <button class="card-button" mat-raised-button
+              (click)="openMaterialDialog(material.materialID)"><b>Detalle</b>
+            </button>
+          </mat-card-actions>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</section>
+
+<!-- Centros -->
+
+<section class="portfolio home-material-section">
+  <div class="section-header">
+    <h2 style="font-size: 28px;">Centros de reciclaje</h2>
+    <p style="font-size: 20px; margin-bottom: 2rem; line-height: 1.2;">
+      En EcoRewards, conectamos a la comunidad con
+       centros de acopio locales que promuevan el reciclaje de manera eficiente y
+       sostenible.
+    </p>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6 col-lg-3" *ngFor="let centro of centerData of centerData">
+      <mat-card class="cardWithShadow material overflow-hidden center-card">
+        <mat-card-content class="p-b-24 p-t-12 position-relative">
+          <mat-card-title style="min-height: 50px;">{{ centro.name }}</mat-card-title>
+          <div class="d-flex align-items-center">
+            <button mat-mini-fab class="bg-light-warning text-success shadow-none icon-27"
+              style="display: flex; justify-content: center; align-items: center;">
+              <i-tabler class="icon-20" name="map-pin-filled" style="color:#f8c076 ;"></i-tabler>
+            </button>
+            <div class="mat-body-1 f-w-600 m-l-12">{{ centro.Address.province }} </div>
+          </div>
+
+
+          <div class="d-flex align-items-center" style="padding-top: .1rem;">
+            <button mat-mini-fab class="bg-light-success text-success shadow-none icon-27">
+              <i-tabler name="clock-2" class="icon-20"></i-tabler>
+            </button>
+            <div class="mat-body-1 f-w-600 m-l-12">{{ centro.operating_hours }} </div>
+          </div>
+
+          <mat-card-actions class="container-actions">
+            <button class="card-button" mat-raised-button (click)="openCenterDialog(centro.centerID)"><b>Details</b>
+            </button>
+          </mat-card-actions>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</section>
+
+
+<div class="row">
+  <div class="col-sm-6 col-lg-3"></div>
+</div>
+
+
+
+
+
+
+
+
+<!-- <section class="portfolio home-material-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 style="font-size: 28px;">Recycling centers</h2>
+      <p style="font-size: 20px; margin-bottom: 2rem; line-height: 1.2;">
+        En EcoRewards, conectamos a la comunidad con
+        centros de acopio locales que promueven el reciclaje de manera eficiente y
+        sostenible.
+      </p>
+    </div>
+    <div fxlayout="row" fxlayout.lt-sm="column" fxlayoutwrap="nowrap" fxlayoutgap="30px"
+      style="flex-direction: row; box-sizing: border-box; display: flex;  flex-wrap: wrap;">
+
+      <div *ngFor="let centro of centerData" fxflex="29"
+        style="margin-right: 30px; flex: 1 1 100%; box-sizing: border-box; max-width: 29%;">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>{{ centro.name }}</mat-card-title>
+            <mat-card-subtitle>{{ centro.Address.province }}</mat-card-subtitle>
+          </mat-card-header>
+          <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+            alt="Photo of a Shiba Inu">
+          <mat-card-content>
+            <p>{{ centro.operating_hours }}</p>
+            <p>{{ centro.Address.exact_address }}</p>
+            <p>Phone: {{ centro.phone }}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button>Details</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+
+  </div>
+</section> -->

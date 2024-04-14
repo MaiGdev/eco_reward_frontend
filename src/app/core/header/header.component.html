@@ -1,0 +1,46 @@
+<mat-toolbar class="topbar">
+  <!-- Mobile Menu -->
+  <button mat-icon-button (click)="toggleMobileNav.emit()" *ngIf="!showToggle">
+    <i-tabler name="menu-2" class="icon-20 d-flex"></i-tabler>
+  </button>
+  <!-- --------------------------------------------------------------- -->
+
+  <!-- --------------------------------------------------------------- -->
+  <!-- Notification Dropdown -->
+  <!-- --------------------------------------------------------------- -->
+
+
+  <span class="m-l-5 nav-caption">
+    {{ userLogin && userLogin.user && userLogin.user.name ? userLogin.user.name : 'Invitado' }}
+  </span>
+
+  <ng-container *ngIf="userLogin && userLogin.user && userLogin.user.role === 3">
+    <button mat-icon-button aria-label="Notifications" class="m-l-10" color="primary"
+      (click)="openChangePasswordModal()">
+      <i-tabler style="color: #0085db;" name="wallet" class="icon-45 d-flex"></i-tabler>
+    </button>
+  </ng-container>
+
+
+  <!-- <button mat-icon-button aria-label="Notifications" class="d-flex align-items-center">
+    <i-tabler class="d-flex" name="bell" matBadge="9" matBadgeColor="primary"></i-tabler>
+  </button> -->
+
+
+  <span class="flex-1-auto"></span>
+  <button mat-icon-button [matMenuTriggerFor]="profilemenu" aria-label="Notifications" class="m-l-10">
+    <i-tabler name="user-circle" class="icon-45 d-flex"></i-tabler>
+  </button>
+  <mat-menu #profilemenu="matMenu" xPosition="before" class="topbar-dd cardWithShadow">
+    <button mat-menu-item (click)="currentUser()">
+      <mat-icon class="d-flex align-items-center">
+        <i-tabler name="user" class="icon-18 d-flex"></i-tabler>
+      </mat-icon>
+      {{ userLogin && userLogin.user && userLogin.user.name ? userLogin.user.name : 'My Profile' }}
+    </button>
+
+    <div class="p-x-12 m-t-12">
+      <a (click)="logout()" mat-flat-button color="primary" class="w-100">Logout</a>
+    </div>
+  </mat-menu>
+</mat-toolbar>

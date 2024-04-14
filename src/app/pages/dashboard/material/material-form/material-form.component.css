@@ -1,0 +1,22 @@
+.grid-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 10px;
+  }
+  
+  .p-10{
+    padding: 10px;
+  }
+  
+  .custom-dropzone {
+    width: 250px;
+    height: 250px;
+  }
+  
+  
+  .custom-dropzone-image-preview {
+    height: 195px !important;
+    margin: 0 auto !important;
+  }

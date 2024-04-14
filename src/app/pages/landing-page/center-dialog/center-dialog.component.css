@@ -1,0 +1,14 @@
+.dialog-card {
+  border-radius: 0;
+  box-shadow: none;
+  min-width: 400px;
+  height: 100% !important;
+}
+
+.mat-mdc-card-header {
+  padding-top: 0.2rem;
+}
+
+.mat-mdc-card-content {
+  padding-bottom: 0;
+}

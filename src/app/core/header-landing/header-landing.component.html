@@ -1,0 +1,52 @@
+<header>
+  <div class="header-container">
+
+
+    <div class="options">
+
+      <button mat-button [routerLink]="'/'" class="mat-focus-indicator hometop-btn mat-button mat-button-base"
+        style="color: rgb(57, 57, 196);">
+        <span class="mat-button-wrapper">
+          <h1>Ecowards</h1>
+        </span>
+      </button>
+    </div>
+
+    <div class="spacer"></div>
+
+    <button mat-button [matMenuTriggerFor]="IsLogged ? loggedMenu : opcionesLoginRegistro" class="right">
+      <span style="display: grid; justify-content: center; align-items: center;">
+        <a mat-button class="mat-focus-indicator hometop-btn icon-button mat-button mat-button-base">
+          <span style="display: flex; justify-content: center; align-items: center;">
+            <mat-icon>person</mat-icon>
+            <strong> My Account</strong>
+          </span>
+        </a>
+      </span>
+    </button>
+
+    <mat-menu #loggedMenu="matMenu">
+      <button mat-menu-item [routerLink]="'/home'"><strong> Dashboard</strong></button>
+    </mat-menu>
+
+    <mat-menu #opcionesLoginRegistro="matMenu">
+      <div style="display: grid;">
+        <button mat-button [routerLink]="'/login'" style="display: flex; justify-content: flex-start;">
+          <mat-icon aria-hidden="false" aria-label="login icon" fontIcon="login" [ariaSetSize]="50" color="primary">
+          </mat-icon> Login
+        </button>
+
+        <button mat-button [routerLink]="'/register'" style="display: flex; justify-content: flex-start;">
+          <mat-icon aria-hidden="false" aria-label="login icon" fontIcon="perm_identity" [ariaSetSize]="50"
+            color="primary">
+          </mat-icon> Registro
+        </button>
+      </div>
+    </mat-menu>
+
+
+
+
+
+  </div>
+</header>

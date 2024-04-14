@@ -1,0 +1,35 @@
+.full-width-table {
+  width: 100%;
+}
+
+.header {
+  background-color: #fafafa;
+  color: #666666;
+}
+.box {
+  padding: 0.2rem 2rem 2rem 2.3rem;
+  box-shadow: 0 2px 6px rgba(37, 83, 185, 0.1);
+}
+
+.container-box {
+  padding: 1rem;
+}
+
+*/ .custom-fab {
+  width: 30px;
+  height: 30px;
+  margin-left: 1rem;
+}
+
+.custom-card {
+  background-color: transparent;
+  box-shadow: none;
+  height: 100px !important;
+  margin: 0;
+}
+
+.centered-content {
+  display: flex;
+  align-items: center;
+  padding: 1rem 4rem 0 4rem;
+}

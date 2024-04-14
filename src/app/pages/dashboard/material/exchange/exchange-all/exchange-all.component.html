@@ -1,0 +1,149 @@
+<mat-card class="full-width" style="min-height: 83vh !important;">
+  <!-- Titulo del Card -->
+  <div class="container-box">
+    <mat-card class="box header rounded">
+      <mat-card class="custom-card">
+        <mat-card-content>
+          <mat-card-title style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="centered-content">
+              <h1 style="padding: 0 2rem 0rem 0;">Historial de canje</h1>
+            </div>
+
+          </mat-card-title>
+        </mat-card-content>
+      </mat-card>
+      
+      <mat-card-content style="margin-top: 1rem; padding: 0 6rem;">
+        <!-- Table -->
+        <div *ngIf="isClient" class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSourceUser" class="full-width-table" matSort aria-label="Elements">
+
+            <ng-container matColumnDef="Recycling_Center">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Centro</th>
+              <td mat-cell *matCellDef="let row">{{row.Recycling_Center.name}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Exchange_Material_Details">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Materiales</th>
+              <td mat-cell *matCellDef="let row">{{ row.Exchange_Material_Details.length }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="exchange_date">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha del canje</th>
+              <td mat-cell *matCellDef="let row">{{row.exchange_date | date:'d/M/y'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="acciones">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+              <td mat-cell *matCellDef="let row">
+
+                <button mat-mini-fab color="accent" matTooltip="Detalle Centro" aria-label="Detalle" color="primary"
+                  (click)="exchangeDetail(row.exchangeID)">
+                  <mat-icon class="mat-18">info</mat-icon>
+                </button>
+
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsUser"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsUser;"></tr>
+          </table>
+
+          <mat-paginator #paginator [length]="dataSourceUser.data.length" [pageIndex]="0" [pageSize]="10"
+            [pageSizeOptions]="[3, 5, 10]" aria-label="Selecione un página">
+          </mat-paginator>
+        </div>
+        <div *ngIf="isCenterAdmin" class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSourceCenter" class="full-width-table" matSort aria-label="Elements">
+
+            <ng-container matColumnDef="client_user">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Cliente</th>
+              <td mat-cell *matCellDef="let row">{{row.client_user.name}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Exchange_Material_Details">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Materiales</th>
+              <td mat-cell *matCellDef="let row">{{ row.Exchange_Material_Details.length }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="total_eco_coins">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Eco Monedas</th>
+              <td mat-cell *matCellDef="let row">{{ row.total_eco_coins }} 🪙</td>
+            </ng-container>
+
+            <ng-container matColumnDef="exchange_date">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha del canje</th>
+              <td mat-cell *matCellDef="let row">{{row.exchange_date | date:'d/M/y'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="acciones">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+              <td mat-cell *matCellDef="let row">
+
+                <button mat-mini-fab color="accent" matTooltip="Detalle Centro" aria-label="Detalle" color="primary"
+                  (click)="exchangeDetail(row.exchangeID)">
+                  <mat-icon class="mat-18">info</mat-icon>
+                </button>
+
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsCenter"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsCenter;"></tr>
+          </table>
+
+          <mat-paginator #paginator [length]="dataSourceCenter.data.length" [pageIndex]="0" [pageSize]="10"
+            [pageSizeOptions]="[3, 5, 10]" aria-label="Selecione un página">
+          </mat-paginator>
+        </div>
+        <div *ngIf="isSuperAdmin" class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSourceAdmin" class="full-width-table" matSort aria-label="Elements">
+            <ng-container matColumnDef="Recycling_Center">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Centro</th>
+              <td mat-cell *matCellDef="let row">{{row.Recycling_Center.name}}</td>
+            </ng-container>
+            <ng-container matColumnDef="client_user">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Cliente</th>
+              <td mat-cell *matCellDef="let row">{{row.client_user.name}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Exchange_Material_Details">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Materiales</th>
+              <td mat-cell *matCellDef="let row">{{ row.Exchange_Material_Details.length }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="total_eco_coins">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Eco Monedas</th>
+              <td mat-cell *matCellDef="let row">{{ row.total_eco_coins }} 🪙</td>
+            </ng-container>
+
+            <ng-container matColumnDef="exchange_date">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha del canje</th>
+              <td mat-cell *matCellDef="let row">{{row.exchange_date | date:'d/M/y'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="acciones">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+              <td mat-cell *matCellDef="let row">
+
+                <button mat-mini-fab color="accent" matTooltip="Detalle Centro" aria-label="Detalle" color="primary"
+                  (click)="exchangeDetail(row.exchangeID)">
+                  <mat-icon class="mat-18">info</mat-icon>
+                </button>
+
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsAdmin"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsAdmin;"></tr>
+          </table>
+
+          <mat-paginator #paginator [length]="dataSourceAdmin.data.length" [pageIndex]="0" [pageSize]="10"
+            [pageSizeOptions]="[3, 5, 10]" aria-label="Selecione un página">
+          </mat-paginator>
+        </div>
+        <!-- Table -->
+      </mat-card-content>
+    </mat-card>
+  </div>
+</mat-card>

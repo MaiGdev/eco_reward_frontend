@@ -1,0 +1,34 @@
+<mat-card class="dashboard-card">
+  <mat-card-content>
+    <div *ngIf="userRole === 'cliente'">
+      <h2>Billetera Virtual</h2>
+      <p>Disponibles: Test 4{{ ecoCoins.disponibles }}</p>
+      <p>Canjeados: Test 5{{ ecoCoins.canjeados }}</p>
+      <p>Recibidos: Test 9{{ ecoCoins.disponibles + ecoCoins.canjeados }}</p>
+    </div>
+
+    <div *ngIf="userRole === 'admin_centro_acopio'">
+      <h2>Dashboard del Centro de Acopio</h2>
+      <p>Centro de Acopio: Test {{ centroAcopio.nombre }}</p>
+      <p>Canjes realizados este mes: Test 22{{ estadisticas.canjesMesActual }}</p>
+      <p>Canjes por material año actual: Test 32</p>
+      <ul>
+        <li *ngFor="let canje of estadisticas.canjesPorMaterial">{{ canje.material }}: {{ canje.cantidad }}</li>
+      </ul>
+      <p>Total eco-monedas generadas: {{ estadisticas.totalEcoMonedas }}</p>
+    </div>
+
+    <div *ngIf="userRole === 'admin'">
+      <h2>Dashboard de Administrador</h2>
+      <p>Canjes de materiales este mes: Test 68{{ adminEstadisticas.canjesMesActual }}</p>
+      <p>Eco-monedas por centro de acopio: Test</p>
+      <ul>
+        <li *ngFor="let ecoMonedas of adminEstadisticas.ecoMonedasPorCentro">{{ ecoMonedas.centro }}: {{
+          ecoMonedas.total }}</li>
+      </ul>
+      <p>Total eco-monedas generadas: Test 55{{ adminEstadisticas.totalEcoMonedas }}</p>
+      <p>Canjes de cupones este año: Test 45{{ adminEstadisticas.canjesCupones }}</p>
+      <p>Eco-monedas utilizadas en canje de cupones este año:  Test 88{{ adminEstadisticas.ecoMonedasCanjeCupones }}</p>
+    </div>
+  </mat-card-content>
+</mat-card>

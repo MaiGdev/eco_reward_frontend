@@ -1,0 +1,23 @@
+.columnExchange {
+  display: inline-block;
+  margin-right: 20px; /* Puedes ajustar este margen según tus necesidades */
+}
+
+.header {
+  background-color: #fafafa;
+  color: #666666;
+}
+.box {
+  padding: 0.2rem 2rem 2rem 2.3rem;
+  box-shadow: 0 2px 6px rgba(37, 83, 185, 0.1);
+}
+
+.container-box {
+  padding: 1rem;
+}
+
+.centered-content {
+  display: flex;
+  align-items: center;
+  padding: 1rem 4rem 0 4rem;
+}
